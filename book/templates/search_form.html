@@ -5,7 +5,9 @@
     <title></title>
 </head>
 <body>
-
+{% if error %}
+    <p style="color:red">Please Enter Search Words</p>
+{% endif %}
 <form action="/search/" method="get">
    <p> <input type="text" name="q"/></p>
     <p><input type="submit" value="Search"/></p>
