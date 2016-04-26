@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+{% if error %}
+    <p type="color:red">Please Enter Search Words</p>
+{% endif %}
+<p>You are search {{ q }}</p>
+Found {{ books|length }} BOOKS:
+{% for book in books %}
+    <p>{{ book }}</p>
+{% empty %}
+    <p>Not Found</p>
+{% endfor %}
+</form>
+</body>
+</html>
