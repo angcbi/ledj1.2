@@ -17,7 +17,7 @@ def contact(request):
             except Exception, e:
                 return HttpResponse('fail')
     else:
-        form = ContactForm(initial={'subject': '', 'email':'' ,'message':''})
+        form = ContactForm(initial={'subject': 'I love your web', 'email':'' ,'message':''})
 
     return render_to_response('contact.html', {'form': form})
 
