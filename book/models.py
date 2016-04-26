@@ -10,3 +10,13 @@ class Book(models.Model):
     def __unicode__(self):
         return self.title
 
+
+class Contact(models.Model):
+    subject = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.subject
+
+

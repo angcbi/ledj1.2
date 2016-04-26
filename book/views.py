@@ -19,15 +19,16 @@ def about_pages(request):
         raise Http404()
 
 
-def search_form(requests):
-    return render_to_response('search_form.html')
-
-
-def search(requests):
-    if 'q' in requests.GET and requests.GET['q']:
+def search(request):
+    errors = ''
+    if 'q' in requests.GET:
         q = requests.GET['q']
-        books = Book.objects.filter(title__icontains=q)
-        print len(books)
-        return render_to_response('search.html', {'books': books, 'q':q})
-    else:
-        return render_to_response('search_form.html',{'error': True})
+        if not q:
+            errors = 'Please Enter Search Words'
+        elif len(q)>=20:
+            errors = 'Large 20'
+        else:
+            books = Book.objects.filter(title__icontains=q)
+            return render_to_response('search.html', {'books': books, 'q':q})
+    print errors
+    return render_to_response('search_form.html',{'errors': errors})

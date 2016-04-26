@@ -5,9 +5,6 @@
     <title>Search</title>
 </head>
 <body>
-{% if error %}
-    <p type="color:red">Please Enter Search Words</p>
-{% endif %}
 <p>You are search {{ q }}</p>
 Found {{ books|length }} BOOKS:
 {% for book in books %}

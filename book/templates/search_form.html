@@ -5,12 +5,13 @@
     <title></title>
 </head>
 <body>
-{% if error %}
-    <p style="color:red">Please Enter Search Words</p>
+{% if errors|length %}
+    <p style="color:red">{{ errors }}</p>
 {% endif %}
-<form action="/search/" method="get">
-   <p> <input type="text" name="q"/></p>
+<form action="" method="get">
+   <p> <input id='search'type="text" name="q"/></p>
     <p><input type="submit" value="Search"/></p>
 </form>
 </body>
+
 </html>
