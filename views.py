@@ -27,7 +27,7 @@ def hours_head(request, offset):
 
 def testloop(requests):
     now = datetime.now()
-    list = []
+    list = [i for i in range(40)]
     t = Template("""*****
     {{ list|length}}****{{time|date:'Y-m-d H:M:S'}}
     ********
@@ -41,3 +41,6 @@ def testloop(requests):
     c = Context({'list': list, 'time': now})
     return HttpResponse(t.render(c))
 
+
+def debug(request):
+    return HttpResponse('debug')
