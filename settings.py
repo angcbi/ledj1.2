@@ -1,3 +1,4 @@
+# -*-coding:utf-8 -*-
 # Django settings for mysite1 project.
 import os
 
@@ -76,9 +77,9 @@ SECRET_KEY = 'z^(*1w%ruq!vl6c6^vd^_b4k#am5qbthibs1i-$06^ini6qh2y'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
+    'django.template.loaders.filesystem.Loader', # template_dir加载
+    'django.template.loaders.app_directories.Loader', # app template 加载template
+    # 'django.template.loaders.eggs.Loader', # python egg加载模板
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,4 +112,13 @@ INSTALLED_APPS = (
     'book',
     'disk',
     'south',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+)
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+    '192.168.1.181',
 )

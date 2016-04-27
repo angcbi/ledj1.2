@@ -2,12 +2,26 @@
 
 from datetime import datetime, timedelta
 from django.http import HttpResponse, Http404
-from django.template import Template, Context
+from django.shortcuts import render_to_response
+from django.template import loader, RequestContext
+from django.views.generic.simple import direct_to_template
+from django.template import TemplateDoesNotExist
+
+
+
+def custome_proc(request):
+    return {
+        'app': 'qq',
+        'user': request.user,
+        'ip': request.META['REMOTE_ADDR'],
+    }
 
 
 def hello(request):
-    return HttpResponse('hello')
-
+    # t = loader.get_template('index.html')
+    # c = RequestContext(request, {'message': 'cc'}, processors=[custome_proc])
+    # return HttpResponse(t.render(c))
+    return render_to_response('index.html', {'message':'c 4 345 56 c'}, context_instance=RequestContext(request))
 
 def current_time(request):
     now = datetime.now()
@@ -27,7 +41,7 @@ def hours_head(request, offset):
 
 def testloop(requests):
     now = datetime.now()
-    list = []
+    list = [i for i in range(40)]
     t = Template("""*****
     {{ list|length}}****{{time|date:'Y-m-d H:M:S'}}
     ********
@@ -41,3 +55,13 @@ def testloop(requests):
     c = Context({'list': list, 'time': now})
     return HttpResponse(t.render(c))
 
+
+def debug(request):
+    return HttpResponse('debug')
+
+
+def about_pages(request, page):
+    try:
+        return direct_to_template(request, template='about/%s.html' % page)
+    except TemplateDoesNotExist:
+        raise  Http404
