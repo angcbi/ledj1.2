@@ -70,5 +70,5 @@ def do_something_post(request):
 # def blog(request, username, page):
 #     return HttpResponse('username:{},page:{}'.format(username, page))
 
-def blog(request, username, page=None):
+def blog(request, username, page):
     return HttpResponse('username:{},page:{}'.format(username, page))
