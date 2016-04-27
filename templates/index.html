@@ -5,10 +5,9 @@
     <title></title>
 </head>
 <body>
-<p>app:{{ app }}</p>
-<p>user:{{ user }}</p>
-<p>ip:{{ ip }}</p>
-<p>message:{{ message }}</p>
+{% load poll_extras %}
+<P>the time is {% current_time "%Y-%m-%d %I:%M:%p" %}</P>
+<p>message:{{ message|upper|cut:' ' }}</p>
 <p>{{ debug }}</p>
 </body>
 </html>

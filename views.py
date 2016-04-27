@@ -18,7 +18,7 @@ def hello(request):
     # t = loader.get_template('index.html')
     # c = RequestContext(request, {'message': 'cc'}, processors=[custome_proc])
     # return HttpResponse(t.render(c))
-    return render_to_response('index.html', {'message':'cc'}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {'message':'c 4 345 56 c'}, context_instance=RequestContext(request))
 
 def current_time(request):
     now = datetime.now()
