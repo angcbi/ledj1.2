@@ -15,6 +15,7 @@ def contact(request):
                 Contact.objects.create(**cd)
                 return HttpResponse('add success')
             except Exception, e:
+                print e
                 return HttpResponse('fail')
     else:
         form = ContactForm(initial={'subject': '', 'email':'' ,'message':''})
