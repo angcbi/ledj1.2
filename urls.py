@@ -1,6 +1,6 @@
 # coding:utf-8
 from django.conf.urls.defaults import *
-from views import hello, current_time, hours_head, testloop
+from mysite1 import views
 from django.contrib import admin
 # from django.views.generic.simple import  direct_to_template
 # from book.views import about_pages
@@ -23,10 +23,10 @@ urlpatterns = patterns('',
     # (r'^disk/$', 'disk.views.register'),
     # (r'^cookie/$', 'disk.views.cook'),
     # (r'^login/$', 'disk.views.login'),
-    (r'^$', hello),
-    (r'^time/$', current_time),
-    (r'^time/plus/(\d{1,2})/$', hours_head),
-    (r'^testloop/$', testloop),
+    (r'^$', views.hello),
+    (r'^time/$', views.current_time),
+    (r'^time/plus/(\d{1,2})/$', views.hours_head),
+    (r'^testloop/$', views.testloop),
     # (r'^search-form/$', 'book.views.search_form'),
     (r'^search/$', 'book.views.search'),
     (r'^contact/$', 'contact.views.contact'),

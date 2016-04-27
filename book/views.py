@@ -21,8 +21,8 @@ def about_pages(request):
 
 def search(request):
     errors = ''
-    if 'q' in requests.GET:
-        q = requests.GET['q']
+    if 'q' in request.GET:
+        q = request.GET['q']
         if not q:
             errors = 'Please Enter Search Words'
         elif len(q)>=20:
