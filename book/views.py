@@ -47,3 +47,28 @@ def mydate(request, mouth, day):
 
 def page(request, num=1):
     return HttpResponse(num)
+
+
+def method_splitter(request, GET=None, POST=None):
+    if request.method == 'GET' and GET is not None:
+        return GET(request)
+    elif request.method =='POST' and POST is not None:
+        return POST(request)
+    else:
+        raise Http404
+
+def do_something_get(request):
+    assert request.method == 'GET'
+    return render_to_response('do_something.html', {'method': request.method})
+
+
+def do_something_post(request):
+    assert request.method == 'POST'
+    return render_to_response('do_something.html', {'method': request.method})
+
+
+# def blog(request, username, page):
+#     return HttpResponse('username:{},page:{}'.format(username, page))
+
+def blog(request, username, page=None):
+    return HttpResponse('username:{},page:{}'.format(username, page))

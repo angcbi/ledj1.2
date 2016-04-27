@@ -3,6 +3,7 @@ from django.conf.urls.defaults import *
 from mysite1 import views
 from django.conf import settings # from mysite1 imort settings
 from book import  models as book_models
+from book import views as book_views
 
 
 # Uncomment the next two lines to enable the admin:
@@ -10,6 +11,7 @@ from book import  models as book_models
 # admin.autodiscover()
 
 # 视图，视图字符串，urlconf字典，url分组，url命名分组，视图函数默认参数
+# URLconf是顺序匹配的，找到匹配项就不会继续查找，因此详细匹配规则放前面
 urlpatterns = patterns('',
     # Example:
     # (r'^mysite1/', include('mysite1.foo.urls')),
@@ -31,6 +33,8 @@ urlpatterns = patterns('',
     (r'^contact_me/$', 'contact.views.contact'),
     (r'^mydate/(?P<mouth>\d{1,2})/((?P<day>\d{1,2}))/$', 'book.views.mydate' ),
     (r'^mydate/birthday/$', 'book.views.mydate', {'mouth': '4', 'day': '2'}),
+    (r'^(?P<username>\w+)/blog/', include('book.urls')),
+
 )
 
 if settings.DEBUG:
@@ -49,5 +53,7 @@ urlpatterns += patterns('book.views',
     # 缺省视图函数参数
     (r'^blog/$', 'page'),
     (r'^blog/page(?P<num>\d+)/$', 'page'),
+    # 请求方法
+    (r'^somepage/$', 'method_splitter', {'GET':book_views.do_something_get, 'POST':book_views.do_something_post}),
 )
 
