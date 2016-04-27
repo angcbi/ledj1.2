@@ -4,6 +4,9 @@ from datetime import datetime, timedelta
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
+from django.views.generic.simple import direct_to_template
+from django.template import TemplateDoesNotExist
+
 
 
 def custome_proc(request):
@@ -55,3 +58,10 @@ def testloop(requests):
 
 def debug(request):
     return HttpResponse('debug')
+
+
+def about_pages(request, page):
+    try:
+        return direct_to_template(request, template='about/%s.html' % page)
+    except TemplateDoesNotExist:
+        raise  Http404

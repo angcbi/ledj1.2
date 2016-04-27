@@ -4,8 +4,16 @@ from mysite1 import views
 from django.conf import settings # from mysite1 imort settings
 from book import  models as book_models
 from book import views as book_views
+from django.views.generic.simple import direct_to_template
+from django.views.generic import list_detail
 
 
+
+book_info = {
+    'queryset': book_models.Book.objects.all(),  # queryset 在渲染前清理缓存，
+    'template_object_name': 'book',
+    'extra_context': {'contact_list': book_models.Contact.objects.all}, # 只传到方法，并不调用（没有（）），每次渲染前执行，否则只会在urlconfi加载时执行一次，以后都不执行
+}
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -35,7 +43,10 @@ urlpatterns = patterns('',
     (r'^mydate/birthday/$', 'book.views.mydate', {'mouth': '4', 'day': '2'}),
     # username会传到到include中的每条记录，视图函数没有设置这个参数会报错
     (r'^(?P<username>\w+)/blog/', include('book.urls')),
-
+    (r'^about/$',direct_to_template, {'template': 'about.html'} ),
+    (r'^about/(\w+)/$', views.about_pages),
+    (r'^bookinfo/$', list_detail.object_list, book_info),
+    (r'^bookinfo/(?P<bookname>\w+)/$', book_views.book),
 )
 
 if settings.DEBUG:

@@ -6,6 +6,8 @@ from django.shortcuts import render_to_response
 from django.views.generic.simple import direct_to_template
 from django.http import Http404
 from django.template import RequestContext
+from django.views.generic import list_detail
+from .models import Contact, Book
 
 from .models import Book, Contact
 
@@ -73,3 +75,11 @@ def do_something_post(request):
 
 def blog(request, username, page):
     return HttpResponse('username:{},page:{}'.format(username, page))
+
+
+def book(request, bookname):
+    return list_detail.object_list(
+        request,
+        queryset = Book.objects.filter(title__icontains=bookname),
+        template_object_name= 'book'
+    )
