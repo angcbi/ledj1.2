@@ -5,13 +5,10 @@
     <title></title>
 </head>
 <body>
-{{ debug }}
-{{ sql_queries }}
-{% for list in m_list %}
-<p>{{ list }}</p>
-{% empty %}
-<p>EMPTY</p>
-{% endfor %}
-
+<p>app:{{ app }}</p>
+<p>user:{{ user }}</p>
+<p>ip:{{ ip }}</p>
+<p>message:{{ message }}</p>
+<p>{{ debug }}</p>
 </body>
 </html>

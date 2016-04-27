@@ -5,6 +5,7 @@ from django.template import TemplateDoesNotExist
 from django.shortcuts import render_to_response
 from django.views.generic.simple import direct_to_template
 from django.http import Http404
+from django.template import RequestContext
 
 from .models import Book, Contact
 
@@ -38,7 +39,7 @@ def search(request):
 def book_view(request, template_name, model):
     m_list = model.objects.all()
     # template_name = 'book/{}_list.html'.format(model.__name__.lower())
-    return render_to_response(template_name, {'m_list':m_list} )
+    return render_to_response(template_name, {'m_list':m_list}, context_instance=RequestContext(request) )
 
 
 def mydate(request, mouth, day):

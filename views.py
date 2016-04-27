@@ -2,12 +2,23 @@
 
 from datetime import datetime, timedelta
 from django.http import HttpResponse, Http404
-from django.template import Template, Context
+from django.shortcuts import render_to_response
+from django.template import loader, RequestContext
+
+
+def custome_proc(request):
+    return {
+        'app': 'qq',
+        'user': request.user,
+        'ip': request.META['REMOTE_ADDR'],
+    }
 
 
 def hello(request):
-    return HttpResponse('hello')
-
+    # t = loader.get_template('index.html')
+    # c = RequestContext(request, {'message': 'cc'}, processors=[custome_proc])
+    # return HttpResponse(t.render(c))
+    return render_to_response('index.html', {'message':'cc'}, context_instance=RequestContext(request))
 
 def current_time(request):
     now = datetime.now()

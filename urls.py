@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     (r'^contact_me/$', 'contact.views.contact'),
     (r'^mydate/(?P<mouth>\d{1,2})/((?P<day>\d{1,2}))/$', 'book.views.mydate' ),
     (r'^mydate/birthday/$', 'book.views.mydate', {'mouth': '4', 'day': '2'}),
+    # username会传到到include中的每条记录，视图函数没有设置这个参数会报错
     (r'^(?P<username>\w+)/blog/', include('book.urls')),
 
 )
