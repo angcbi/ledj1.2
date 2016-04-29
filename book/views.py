@@ -49,7 +49,11 @@ def mydate(request, mouth, day):
 
 
 def page(request, num=1):
-    return HttpResponse(num)
+      print 'META', request.META['User-Agent']
+      print '*'*20
+      print 'REQUEST',request.REQUEST.items()
+      print '*'*20
+      return HttpResponse(num)
 
 
 def method_splitter(request, GET=None, POST=None):
