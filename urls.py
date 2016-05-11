@@ -6,6 +6,7 @@ from book import  models as book_models
 from book import views as book_views
 from django.views.generic.simple import direct_to_template
 from django.views.generic import list_detail
+from django.contrib.auth.views import login, logout
 
 
 
@@ -24,7 +25,7 @@ urlpatterns = patterns('',
     # Example:
     # (r'^mysite1/', include('mysite1.foo.urls')),
 
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
+    # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
@@ -52,6 +53,9 @@ urlpatterns = patterns('',
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^debug/$', 'views.debug'),
+          (r'^accounts/login/$', login, {'template_name': 'login.html'}),
+          (r'^accounts/logout/$', logout),
+          (r'^accounts/register/$', book_views.register),
     )
 
 
@@ -59,6 +63,7 @@ urlpatterns += patterns('book.views',
     (r'^search/$', 'search'),
     # 视图函数只关心获取到参数，不关心参数是url捕获的或者是关键字传值来的
     # 如果URLconf捕捉到的一个命名组变量和一个额外URLconf参数包含的变量同名时，额外URLconf参数的值会被使用
+    (r'^color/$', 'show_color'),
     (r'^book/$', 'book_view', {'template_name': 'book_list.html', 'model':book_models.Book}),
     (r'^contact/$', 'book_view', {'template_name': 'contact_list.html', 'model':book_models.Contact}),
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>验证表达</title>
+    <!--<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#loginform").validate({
+                rules:{
+                    username:{
+                        required: true,
+                        minlength: 2
+                    },
+                    email: {
+                        required: true
+                    }
+                },
+                messages: {
+                    username:{
+                        required: "输入用户名",
+                        minlength: "长度在2-6之前"
+                    },
+                    email: {
+                        required: "输入邮箱"
+                    }
+                },
+                debug: true
+            })
+        });
+
+    </script> -->
+</head>
+<body>
+
+{% if form.errors %}
+    <p class="error">用户名或密码不对</p>
+{% endif %}
+
+<form id="loginform" action="" method="post">
+     {% csrf_token %}
+    <p>
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username"/>
+    </p>
+    <p>
+        <label for="password">邮箱</label>
+        <input type="password" id="email" name="password"/>
+    </p>
+    <p>
+        <input type="submit" value="login"/>
+        <input type="hidden" name="next" value="{{ next|escape }}"/>
+    </p>
+</form>
+</body>
+</html>

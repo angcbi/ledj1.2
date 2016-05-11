@@ -1,13 +1,14 @@
 # -*- coding:utf-8 -*-
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import TemplateDoesNotExist
 from django.shortcuts import render_to_response
 from django.views.generic.simple import direct_to_template
 from django.http import Http404
 from django.template import RequestContext
 from django.views.generic import list_detail
-from .models import Contact, Book
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Book, Contact
 
@@ -87,3 +88,25 @@ def book(request, bookname):
         queryset = Book.objects.filter(title__icontains=bookname),
         template_object_name= 'book'
     )
+
+
+def show_color(request):
+      if 'color' in request.GET:
+            color = request.GET['color']
+            response = HttpResponse('color is %s ' % color)
+            response.set_cookie('color',color, max_age=60*60*12)
+            request.session['color'] = '123124'
+            return  response
+      return HttpResponse('you have no color')
+
+
+def register(request):
+      if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                  new_user = form.save()
+                  return HttpResponseRedirect('/time')
+      else:
+            form = UserCreationForm()
+
+      return render_to_response('register.html', {'form': form})

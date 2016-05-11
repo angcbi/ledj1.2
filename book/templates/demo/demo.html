@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> ZTREE DEMO </TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href=""/>
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ztree.all.min.js"></script>
+
+    <SCRIPT LANGUAGE="JavaScript">
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            callback: {
+                onClick: zTreeOnClick,
+                onRename: zTreeOnRename,
+                beforeRename: zTreeBeforeRename
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: 'id',
+                    pIdKey: 'pId',
+                    rootPid: null
+                }
+            },
+            view: {
+                showLine: false
+            },
+            edit: {
+                enable: true,
+                showRemoveBtn: true,
+                showRenameBtn: true,
+                removeTitle: '删除部门',
+                renameTitle: '重命名部门'
+            }
+        };
+        function zTreeOnClick(event, treeId, treeNode) {
+            alert(treeNode.tId + ' ' + treeNode.name);
+        }
+        ;
+
+        function zTreeOnRename(event, treeId, treeNode, isCancel) {
+            $.ajax(
+
+            )
+            isCancel = True
+            alert('重命名' + treeNode.tId + ' ' + treeNode.name);
+        }
+        ;
+
+        function zTreeBeforeRename(treeId, treeNode, newName, isCancel) {
+            return newName.length > 5;
+        }
+
+        function searchNode(e) {
+            var zTree = $.fn.zTree.getZTreeObj("#treeDemo");
+            value = key.get(0).value;
+            alert(value);
+            console.log(value)
+            zTree.getNodesByParamFuzzy(value);
+        }
+        ;
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            {id: 1, pId: 0, name: "运维部", icon: 'icon.png'},
+            {id: 11, pId: 1, name: "上海"},
+            {id: 13, pId: 11, name: "静安"},
+            {id: 12, pId: 1, name: "北京"}
+        ];
+
+
+        $(document).ready(function () {
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+    </SCRIPT>
+</HEAD>
+<BODY>
+<div>
+    <ul id="treeDemo" class="ztree"></ul>
+</div>
+<div>
+    <i class="fa caret-down"></i>
+    <i class="fa arrow-down"></i>
+    <i class="fa caret-right"></i>
+    <i class="fa fa-sitemap"></i>
+    <i class="fa fa-home fa-fw"></i>
+</div>
+</BODY>
+</HTML>

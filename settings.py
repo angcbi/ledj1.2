@@ -5,7 +5,7 @@ import os
 BASE_DIR = os.path.dirname(__file__)
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -92,6 +92,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'mysite1.urls'
 
+LOGIN_REDIRECT_URL = '/time'
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -116,6 +118,7 @@ INSTALLED_APPS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
+    'django.core.context_processors.auth',
 )
 
 INTERNAL_IPS = (

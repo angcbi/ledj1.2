@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
 from django.views.generic.simple import direct_to_template
 from django.template import TemplateDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -23,9 +24,11 @@ def hello(request):
     # return HttpResponse(t.render(c))
     return render_to_response('index.html', {'message':'c 4 345 56 c'}, context_instance=RequestContext(request))
 
+
+@login_required()
 def current_time(request):
-    now = datetime.now()
-    return HttpResponse(now)
+      now = datetime.now()
+      return HttpResponse(now)
 
 
 def hours_head(request, offset):
