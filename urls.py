@@ -48,6 +48,7 @@ urlpatterns = patterns('',
     (r'^about/(\w+)/$', views.about_pages),
     (r'^bookinfo/$', list_detail.object_list, book_info),
     (r'^bookinfo/(?P<bookname>\w+)/$', book_views.book),
+    (r'^downloadtemp', book_views.downloadtemp),
 )
 
 if settings.DEBUG:

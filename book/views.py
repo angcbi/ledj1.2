@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.views.generic import list_detail
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+import json
 
 from .models import Book, Contact
 
@@ -110,3 +111,15 @@ def register(request):
             form = UserCreationForm()
 
       return render_to_response('register.html', {'form': form})
+
+
+def downloadtemp(request):
+      res = {'success': False, 'data': {}, 'message': ''}
+      response = HttpResponse(mimetype='application/vnd.ms-excel')
+      with open(r'e:\355420_employee.xls', 'rb') as f:
+            res['data'] = f.read()
+            response.write(res)
+            response['Content-Disposition'] =  'attachment; filename=unruly.xls'
+
+      return response
+
