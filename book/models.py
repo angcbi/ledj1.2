@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+import hashlib
 from django.db import models
 
 
@@ -25,5 +26,30 @@ class Contact(models.Model):
 
     def __unicode__(self):
         return self.subject
+
+
+class Account(models.Model):
+      business_email = models.EmailField()
+      business_password = models.CharField(max_length=30)
+      contact_first_name = models.CharField(max_length=30)
+      contact_last_name = models.CharField(max_length=30)
+      is_active = models.BooleanField()
+
+      def is_authenticated(self):
+            return True
+
+      def hashed_password(self, password=None):
+            if not password:
+                  return self.business_password
+            else:
+                  return hashlib.md5(password).hexdigest()
+
+      def check_password(self, password):
+            if self.hashed_password(password) == self.business_password:
+                  return True
+            return False
+
+
+
 
 

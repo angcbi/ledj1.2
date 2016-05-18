@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="static/css/select2.css"/>
+
+    <stript src="static/js/bootstrap.min.js"></stript>
+    <stript src="static/js/jquery.js"></stript>
+    <stript src="static/js/select2.js"></stript>
+
+</head>
+<body>
+                    <div class="col-sm-9">
+                        <select id="s1" class="select2" data-placeholder="" multiple>
+                            <option value="#">总经理办公室</option>
+                            <option value="United States">校园招聘部</option>
+                            <option value="United Kingdom">行政管理部</option>
+                            <option value="Afghanistan">员工关系部</option>
+                            <option value="Aland Islands">档案管理部</option>
+                            <option value="Albania">网络管理部</option>
+                            <option value="Algeria">法务部</option>
+                            <option value="American Samoa">企划部</option>
+                            <option value="Andorra">人力资源部</option>
+                            <option value="Angola">综合管理部</option>
+                            <option value="Anguilla">结算管理部</option>
+                        </select>
+                    </div>
+
+<script>
+$(document).ready(function(){
+    $("#s1").select2();
+})
+</script>
+</body>
+</html>
